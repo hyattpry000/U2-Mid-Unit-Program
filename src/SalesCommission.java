@@ -16,12 +16,54 @@ Total Sales: $65,000.00
 
 Total Earnings: $1184.38
 
+PLAN
+1. GET INPUT - HOURLY RATE, HOURS WORKED, COMMISSSION PERCENT, TOTAL SALES
+2. CALC PAY - RATE*HOURS
+3. CALC COMMISSION- PERCENT*TOTAL SALES
+4. ADD PAY AND COMMISSION
+RETURN
  */
+
+import jdk.nashorn.internal.scripts.JO;
+
+import javax.swing.*;
+import java.text.DecimalFormat;
 
 public class SalesCommission {
 
     public static void main(String[] args) {
 
+        double hourlyRate = getInput("Enter your hourly rate");
+        double hoursWorked = getInput("Enter your total hours worked");
+        double commPercent = getInput("Enter your commission percentage");
+        double salesTotal = getInput("Enter your total sales in $$");
+        double calcPay = calcPay(hourlyRate, hoursWorked);
+        double calcComm = calcComm(commPercent, salesTotal);
+        double totalEarnings = calcComm + calcPay;
+        outputResults(totalEarnings);
+        System.exit(0);
+
     }
+    public static double getInput(String message){
+        return Double.parseDouble(JOptionPane.showInputDialog(message));
+    }
+    public static void outputResults(double totalEarnings){
+        DecimalFormat round = new DecimalFormat("##,###.##");
+        JOptionPane.showMessageDialog(null, "Your total earnings are: " + totalEarnings);
+    }
+
+    public static double calcPay (double hourlyRate, double hoursWorked){
+        double pay = hourlyRate*hoursWorked;
+        return pay;
+    }
+    public static double calcComm(double commPercent, double salesTotal){
+        double commission = commPercent*salesTotal;
+        return commission;
+    }
+    public static double totalEarnings(double pay, double commission){
+        double totalEarnings = pay + commission;
+        return totalEarnings;
+    }
+
 
 }
